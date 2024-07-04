@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4518993 */
+  src: url('iconfont.woff2?t=1715332255734') format('woff2'),
+       url('iconfont.woff?t=1715332255734') format('woff'),
+       url('iconfont.ttf?t=1715332255734') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-doing-icon:before {
+  content: "\e600";
+}
+
+.icon-pass-icon:before {
+  content: "\ed1a";
+}
+
+.icon-access-icon:before {
+  content: "\e716";
+}
+
+.icon-change-to-right:before {
+  content: "\e661";
+}
+
+.icon-user-workspace-icon:before {
+  content: "\e60b";
+}
+
+.icon-car-violation-icon:before {
+  content: "\e672";
+}
+
+.icon-car-icon:before {
+  content: "\e62a";
+}
+
+.icon-car-enter-out-icon:before {
+  content: "\eae5";
+}
+
+.icon-user-change-password-icon:before {
+  content: "\e637";
+}
+
+.icon-user-information-icon:before {
+  content: "\e64c";
+}
+
