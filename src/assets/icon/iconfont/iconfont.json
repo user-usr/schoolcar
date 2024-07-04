@@ -1,0 +1,79 @@
+{
+  "id": "4518993",
+  "name": "schoolcar",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "4132545",
+      "name": "处理中",
+      "font_class": "doing-icon",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "7947748",
+      "name": "错误空心",
+      "font_class": "pass-icon",
+      "unicode": "ed1a",
+      "unicode_decimal": 60698
+    },
+    {
+      "icon_id": "11641726",
+      "name": "处理完成",
+      "font_class": "access-icon",
+      "unicode": "e716",
+      "unicode_decimal": 59158
+    },
+    {
+      "icon_id": "38289673",
+      "name": "双箭头右",
+      "font_class": "change-to-right",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "12249269",
+      "name": "工作台",
+      "font_class": "user-workspace-icon",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "15436803",
+      "name": "违章",
+      "font_class": "car-violation-icon",
+      "unicode": "e672",
+      "unicode_decimal": 58994
+    },
+    {
+      "icon_id": "19788195",
+      "name": "icon_scooter",
+      "font_class": "car-icon",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "22773419",
+      "name": "车辆出入记录",
+      "font_class": "car-enter-out-icon",
+      "unicode": "eae5",
+      "unicode_decimal": 60133
+    },
+    {
+      "icon_id": "17066724",
+      "name": "修改密码",
+      "font_class": "user-change-password-icon",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "34618014",
+      "name": "个人信息",
+      "font_class": "user-information-icon",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    }
+  ]
+}
