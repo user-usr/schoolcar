@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.GOTEL.SchoolCar.Mapper.NewsMapper">
+    <select id="getAll" resultType="com.GOTEL.SchoolCar.Entity.News">
+        select *
+        from News
+    </select>
+
+    <select id="getByNID" resultType="com.GOTEL.SchoolCar.Entity.News">
+        select *
+        from News
+        where NID = #{NID}
+    </select>
+
+    <delete id="deleteNews">
+        delete from news
+        where NID = #{nid}
+    </delete>
+
+    <select id="selectAllNid">
+        select news.NID
+        from news
+    </select>
+
+    <insert id="insertNews">
+        insert into news(nid, n_title, n_time, n_author, n_content)
+        VALUES (#{NID}, #{N_Tile}, #{N_Time}, #{B_Author}, #{N_Content})
+    </insert>
+
+</mapper>

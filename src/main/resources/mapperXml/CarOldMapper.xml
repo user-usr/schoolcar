@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.GOTEL.SchoolCar.Mapper.CarOldMapper">
+<insert id="insertCarOld">
+    insert into carold(cid, uid, c_platenumber, c_brand, c_model, c_type, c_color, c_time)
+    VALUES (#{CID}, #{UID}, #{C_PlateNumber}, #{C_Brand}, #{C_Model}, #{C_Type}, #{C_Color}, #{C_Time})
+</insert>
+
+    <select id="selectByUidAndTime">
+        select *
+        from carold
+        where uid = #{uid} and c_time = #{time}
+    </select>
+</mapper>

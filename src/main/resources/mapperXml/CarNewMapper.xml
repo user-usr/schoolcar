@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.GOTEL.SchoolCar.Mapper.CarNewMapper">
+    <select id="getByUIDAndTime" resultType="com.GOTEL.SchoolCar.Entity.CarNew">
+        select *
+        from Carnew
+        where UID = #{UID} AND C_Time = #{time}
+    </select>
+
+    <insert id="insertCarNew" parameterType="com.GOTEL.SchoolCar.Entity.CarNew">
+        insert into carnew(CID, UID, C_PlateNumber, C_Brand, C_Model, C_Type, C_Color, C_Time)
+        VALUES (#{CID}, #{UID}, #{C_PlateNumber}, #{C_Brand}, #{C_Model}, #{C_Type}, #{C_Color}, #{C_Time})
+    </insert>
+
+    <delete id="deleteCarNew">
+        delete from carnew
+        where UID = #{uid}
+    </delete>
+</mapper>
