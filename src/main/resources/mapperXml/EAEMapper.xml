@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.GOTEL.SchoolCar.Mapper.EAEMapper">
+    <select id="getAll" resultType="com.GOTEL.SchoolCar.Entity.EAE">
+        select E_Time, E_Direction, E_Where, C_PlateNumber
+        from EAE
+        join car on car.CID = EAE.CID
+        where EID != ''
+        <if test="map.plateNumber != null and map.plateNumber != ''">
+            AND C_PlateNumber = #{map.plateNumber}
+        </if>
+        <if test="map.where != null and map.where != ''">
+            AND E_Where = #{map.where}
+        </if>
+        <if test="map.direction != null and map.direction != ''">
+            AND E_Direction = #{map.direction}
+        </if>
+    </select>
+
+    <select id="getByUID" resultType="com.GOTEL.SchoolCar.Entity.EAE">
+        select E_Time, E_Direction, E_Where, C_PlateNumber
+        from EAE
+        join car on car.CID = EAE.CID
+        join user on user.UID = car.UID
+        where user.UID = #{uid}
+        <if test="map.plateNumber != null and map.plateNumber != ''">
+            AND C_PlateNumber = #{map.plateNumber}
+        </if>
+        <if test="map.where != null and map.where != ''">
+            AND E_Where = #{map.where}
+        </if>
+        <if test="map.direction != null and map.direction != ''">
+            AND E_Direction = #{map.direction}
+        </if>
+    </select>
+
+    <select id="selectAllEid">
+        select eae.EID
+        from eae
+    </select>
+    <insert id="insertEAE">
+        insert into eae(eid, cid, e_time, e_direction, e_where)
+        VALUES (#{EID}, #{CID}, #{E_Time}, #{E_Direction}, #{E_Where})
+    </insert>
+
+</mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.GOTEL.SchoolCar.Mapper.ViolationMapper">
+    <select id="getAll" resultType="com.GOTEL.SchoolCar.Entity.Violation">
+        select v_time,
+        v_where,
+        v_type,
+        v_description,
+        v_punish,
+        v_evidence,
+        c_platenumber,
+        w_realname
+        from Violation
+        join car on car.CID = Violation.CID
+        join worker on worker.WID = Violation.WID
+        where car.CID = violation.CID
+        <if test="map.plateNumber != null and map.plateNumber != ''">
+            AND C_PlateNumber = #{map.plateNumber}
+        </if>
+        <if test="map.wRealName != null and map.wRealName != ''">
+            AND W_RealName = #{map.wRealName}
+        </if>
+        <if test="map.type != null and map.type != ''">
+            AND V_Type = #{map.type}
+        </if>
+        <if test="map.where != null and map.where != ''">
+            AND V_Where = #{map.where}
+        </if>
+    </select>
+
+    <select id="getByUID" resultType="com.GOTEL.SchoolCar.Entity.Violation">
+        select v_time,
+               v_where,
+               v_type,
+               v_description,
+               v_punish,
+               v_evidence,
+               c_platenumber,
+               w_realname
+        from Violation
+                 join car on car.CID = Violation.CID
+                 join user on user.UID = car.UID
+                 join worker on worker.WID = Violation.WID
+        where user.UID = #{uid}
+        <if test="map.plateNumber != null and map.plateNumber != ''">
+            AND C_PlateNumber = #{map.plateNumber}
+        </if>
+        <if test="map.wRealName != null and map.wRealName != ''">
+            AND W_RealName = #{map.wRealName}
+        </if>
+        <if test="map.type != null and map.type != ''">
+            AND V_Type = #{map.type}
+        </if>
+        <if test="map.where != null and map.where != ''">
+            AND V_Where = #{map.where}
+        </if>
+    </select>
+
+    <select id="getAllVid">
+        select VID
+        from violation
+    </select>
+
+    <insert id="insertViolation" parameterType="com.GOTEL.SchoolCar.Entity.Violation">
+        insert into violation(vid, cid, wid, v_time, v_where, v_type, v_description, v_punish, v_evidence)
+        VALUES (#{VID}, #{CID}, #{WID}, #{V_Time}, #{V_Where}, #{V_Type}, #{V_Description}, #{V_Punish}, #{V_Evidence})
+    </insert>
+</mapper>

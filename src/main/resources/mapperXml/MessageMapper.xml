@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.GOTEL.SchoolCar.Mapper.MessageMapper">
+    <select id="getAll" resultType="com.GOTEL.SchoolCar.Entity.Message">
+        select *
+        from Message
+    </select>
+
+    <select id="getByMID" resultType="com.GOTEL.SchoolCar.Entity.Message">
+        select *
+        from Message
+        where MID = #{MID}
+    </select>
+
+    <insert id="insertMessage" parameterType="com.GOTEL.SchoolCar.Entity.Message">
+        insert into message (MID, UID, WID, M_State, M_CreateTime, M_UpdateTime, M_Type, M_Description, M_Evidence)
+        VALUES (#{MID}, #{UID}, #{WID}, #{M_State}, #{M_CreateTime}, #{M_UpdateTime}, #{M_Type}, #{M_Description},
+                #{M_Evidence})
+    </insert>
+
+    <select id="getByUID" resultType="com.GOTEL.SchoolCar.Entity.Message">
+        select mid,
+               m_state,
+               m_createtime,
+               m_updatetime,
+               m_type,
+               m_description,
+               m_evidence,
+               u_realname,
+               w_realname,
+               message.UID
+        from Message
+                 join user on user.UID = Message.UID
+                 join worker on worker.WID = Message.WID
+        where user.UID = #{UID}
+    </select>
+
+    <select id="getByWID" resultType="com.GOTEL.SchoolCar.Entity.Message">
+        select mid,
+               m_state,
+               m_createtime,
+               m_updatetime,
+               m_type,
+               m_description,
+               m_evidence,
+               u_realname,
+               w_realname,
+               message.UID
+        from Message
+                 join user on user.UID = Message.UID
+                 join worker on worker.WID = Message.WID
+        where worker.WID = #{wid}
+    </select>
+
+    <update id="doYes">
+        update message
+        set M_State = '1', M_UpdateTime = #{map.updateTime}
+        <if test="map.description != null and map.description != ''">
+            , M_Description = #{map.description}
+        </if>
+        where MID = #{map.mid}
+    </update>
+
+    <update id="doNo">
+        update message
+        set M_State = '2', M_UpdateTime = #{map.updateTime}
+        <if test="map.description != null and map.description != ''">
+            , M_Description = #{map.description}
+        </if>
+        where MID = #{map.mid}
+    </update>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.GOTEL.SchoolCar.Mapper.NotifyMapper">
+    <select id="selectAllId">
+        select notify.ID
+        from notify
+    </select>
+    <insert id="insert">
+        insert into notify(id, fid, tid, time, title, content, content_type)
+        VALUES (#{id}, #{fid}, #{tid}, #{time}, #{title}, #{content}, #{content_type})
+    </insert>
+    <select id="selectByTid">
+        select *
+        from notify
+        where tid = #{tid}
+    </select>
+
+</mapper>

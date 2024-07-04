@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.GOTEL.SchoolCar.Mapper.CarMapper">
+    <select id="getAll" resultType="com.GOTEL.SchoolCar.Entity.Car">
+        select cid,
+               u.uid,
+               c_platenumber,
+               c_brand,
+               c_model,
+               c_type,
+               c_color,
+               u_realname,
+               u_studentid
+        from car
+                 join schoolcar.user u on u.UID = car.UID
+        where car.UID = u.UID
+        <if test="map.plateNumber != null and map.plateNumber != ''">
+            AND C_PlateNumber = #{map.plateNumber}
+        </if>
+        <if test="map.realName != null and map.realName != ''">
+            AND U_RealName = #{map.realName}
+        </if>
+        <if test="map.branch != null and map.branch != ''">
+            AND C_Brand = #{map.branch}
+        </if>
+        <if test="map.model != null and map.model != ''">
+            AND C_Model = #{map.model}
+        </if>
+        <if test="map.type != null and map.type != ''">
+            AND C_Type = #{map.type}
+        </if>
+        <if test="map.color != null and map.color != ''">
+            AND C_Color = #{map.color}
+        </if>
+    </select>
+
+    <select id="getByUID" resultType="com.GOTEL.SchoolCar.Entity.Car">
+        select CID,
+               user.UID,
+               c_platenumber,
+               c_brand,
+               c_model,
+               c_type,
+               c_color,
+               u_realname,
+               U_StudentID
+        from car
+                 join user on user.UID = car.UID
+        where user.UID = #{uid}
+    </select>
+
+    <update id="updateCar" parameterType="com.GOTEL.SchoolCar.Entity.CarNew">
+        update car
+        set C_PlateNumber = #{C_PlateNumber},
+            C_Brand       = #{C_Brand},
+            C_Model       = #{C_Model},
+            C_Type        = #{C_Type},
+            C_Color       = #{C_Color}
+        where CID = #{CID}
+    </update>
+
+    <select id="getAllPlateNumber">
+        select C_PlateNumber
+        from car
+    </select>
+
+    <select id="getCidByPlateNumber">
+        select car.CID
+        from car
+        where C_PlateNumber = #{plate}
+    </select>
+
+    <insert id="insertCar" parameterType="com.GOTEL.SchoolCar.Entity.CarNew">
+        insert into car (CID, UID, C_PlateNumber, C_Brand, C_Model, C_Type, C_Color)
+        VALUES (#{CID}, #{UID}, #{C_PlateNumber}, #{C_Brand}, #{C_Model}, #{C_Type}, #{C_Color})
+    </insert>
+
+    <select id="getCarNumber">
+        select count(car.CID)
+        from car
+    </select>
+
+    <select id="getUidByCid">
+        select car.UID
+        from car
+        where CID = #{cid}
+    </select>
+</mapper>

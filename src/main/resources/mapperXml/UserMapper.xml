@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.GOTEL.SchoolCar.Mapper.UserMapper">
+
+    <select id="getAll" resultType="com.GOTEL.SchoolCar.Entity.User">
+        select *
+        from User
+        where UID != ''
+        <if test="map.realName != null and map.realName != ''">
+            AND U_RealName = #{map.realName}
+        </if>
+        <if test="map.studentId != null and map.studentId != ''">
+            AND U_StudentID = #{map.studentId}
+        </if>
+        <if test="map.college != null and map.college != ''">
+            AND U_College = #{map.college}
+        </if>
+        <if test="map.major != null and map.major != ''">
+            AND U_Major = #{map.major}
+        </if>
+        <if test="map.grade != null and map.grade != ''">
+            AND U_Grade = #{map.grade}
+        </if>
+        <if test="map.classNumber != null and map.classNumber != ''">
+            AND U_Class = #{map.classNumber}
+        </if>
+    </select>
+
+    <select id="getByUserStudentID" resultType="com.GOTEL.SchoolCar.Entity.User">
+        select *
+        from User
+        where U_StudentID = #{U_StudentID}
+    </select>
+
+    <select id="getByUID" resultType="com.GOTEL.SchoolCar.Entity.User">
+        select UID, u_realname, u_name, u_password, u_college, u_major, u_grade, u_class, u_tel, u_email, u_studentid, u_id
+        from User
+        where UID = #{UID}
+    </select>
+
+    <update id="updateUser" parameterType="com.GOTEL.SchoolCar.Entity.User">
+        update User
+        <set>
+            U_RealName=#{U_RealName},
+            U_Name=#{U_Name},
+            U_Password=#{U_Password},
+            U_College=#{U_College},
+            U_Major=#{U_Major},
+            U_Grade=#{U_Grade},
+            U_Class=#{U_Class},
+            U_Tel=#{U_Tel},
+            U_Email=#{U_Email},
+            U_StudentID=#{U_StudentID},
+            U_ID=#{U_ID},
+        </set>
+        <where>
+            UID=#{UID}
+        </where>
+    </update>
+
+    <update id="updatePassword">
+        update User
+        <set>
+            U_Password=#{password}
+        </set>
+        <where>
+            UID=#{uid}
+        </where>
+    </update>
+
+    <insert id="addUser" parameterType="com.GOTEL.SchoolCar.Entity.User">
+        insert into User (UID, U_RealName, U_Name, U_Password, U_College, U_Major, U_Grade, U_Class, U_Tel, U_Email,
+                          U_StudentID, U_ID)
+        values (#{UID}, #{U_RealName}, #{U_Name}, #{U_Password}, #{U_College}, #{U_Major}, #{U_Grade}, #{U_Class},
+                #{U_Tel}, #{U_Email}, #{U_StudentID}, #{U_ID})
+    </insert>
+
+    <select id="getAllUID">
+        select user.UID
+        from user
+    </select>
+
+    <select id="getPasswordByUID">
+        select user.U_Password
+        from user
+        where UID = #{uid}
+    </select>
+
+    <select id="getUserNumber">
+        select count(user.UID)
+        from user
+    </select>
+
+    <select id="getAllStudentId">
+        select user.U_StudentID
+        from user
+    </select>
+
+    <insert id="insertByMap">
+        insert into user(uid, u_realname, u_name, u_password, u_college, u_major, u_grade, u_class, u_tel, u_email,
+                         u_studentid, u_id)
+        values (#{map.uid}, #{map.realName}, #{map.name}, #{map.password}, #{map.college}, #{map.major}, #{map.grade},
+                #{map.classNumber},
+                #{map.tel}, #{map.email}, #{map.studentID}, #{map.id})
+    </insert>
+    <insert id="insertUsersMaps">
+        insert into user(uid, u_realname, u_name, u_password, u_college, u_major, u_grade, u_class, u_tel, u_email,
+        u_studentid, u_id)
+        VALUES
+        <foreach collection="list" item="map" separator=",">
+            (#{map.uid}, #{map.realName}, #{map.name}, #{map.password}, #{map.college}, #{map.major}, #{map.grade},
+            #{map.classNumber},
+            #{map.tel}, #{map.email}, #{map.studentID}, #{map.id})
+        </foreach>
+    </insert>
+    <select id="selectByPlate">
+        select *
+        from user
+        join schoolcar.car c on user.UID = c.UID
+        where c.C_PlateNumber = #{plate}
+    </select>
+</mapper>
